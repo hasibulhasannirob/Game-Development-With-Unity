@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public float turnSpeed = 30f;
     public float horizontalInput;
     public float verticalInput;
+    public AudioManger audioManger;
 
     // Start is called before the first frame update
     void Start()
@@ -24,5 +25,13 @@ public class PlayerController : MonoBehaviour
         /*transform.Translate(0, 0, 1);*/
         transform.Translate(Vector3.forward * Time.deltaTime * vehicleSpeed * verticalInput);
         transform.Rotate(Vector3.up * Time.deltaTime * turnSpeed * horizontalInput);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Obstacle"))
+        {
+            audioManger.PlaySound("SoundEffect");
+        }
     }
 }
